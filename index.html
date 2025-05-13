@@ -1,1 +1,132 @@
-Comming soon
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terinashi | Coming&nbsp;Soon</title>
+
+  <!-- Google Font for a soft, modern feel -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Basic meta for link previews -->
+  <meta property="og:title" content="Terinashi | Coming Soon" />
+  <meta property="og:description" content="A new sound is taking shape – stay tuned." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://terinashi.com" />
+  <meta property="og:image" content="https://terinashi.com/cover.jpg" /> <!-- replace when you have artwork -->
+
+  <style>
+    /* ===== Tone‑on‑tone "Barbie but subtle" palette ===== */
+    :root {
+      --pink‑light: #ffeaf8;
+      --pink‑mid:   #ffd6f0;
+      --pink‑deep:  #ffb6e9;
+      --text‑primary: #3f003f; /* deep plum for contrast */
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: 'Quicksand', sans-serif;
+      color: var(--text‑primary);
+      /* Soft diagonal gradient */
+      background: linear-gradient(135deg, var(--pink‑light) 0%, var(--pink‑mid) 60%, var(--pink‑deep) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    main {
+      padding: 0 1.5rem;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 8vw, 4.5rem);
+      font-weight: 700;
+      margin: 0;
+      letter-spacing: 0.05em;
+    }
+
+    h2 {
+      font-size: clamp(1.25rem, 4vw, 2rem);
+      font-weight: 600;
+      margin: 0.5rem 0 1.2rem;
+    }
+
+    p.desc {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      max-width: 620px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.55;
+    }
+
+    /* Simple email‑capture form (no backend yet) */
+    form {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    input[type="email"] {
+      padding: 0.75rem 1rem;
+      border: 2px solid var(--pink‑deep);
+      border-radius: 9999px;
+      background: #ffffffee;
+      min-width: 240px;
+      font-size: 1rem;
+      outline: none;
+    }
+    input[type="email"]:focus {
+      border-color: var(--text‑primary);
+    }
+
+    button {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 9999px;
+      background: var(--text‑primary);
+      color: white;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+    button:hover {
+      transform: translateY(-2px);
+    }
+
+    /* Small print */
+    footer {
+      margin-top: 3rem;
+      font-size: 0.85rem;
+      opacity: 0.6;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>TERINASHI</h1>
+    <h2>COMING&nbsp;SOON</h2>
+    <p class="desc">A new sound is taking shape&nbsp;&mdash;&nbsp;stay tuned and be the first to feel the vibe.</p>
+
+    <!-- Optional: collect emails with a service later -->
+    <form action="#" method="post" onsubmit="alert('Thanks! We\'ll keep you posted.'); return false;">
+      <input type="email" name="email" placeholder="your@email.com" required />
+      <button type="submit">Notify Me</button>
+    </form>
+
+    <footer>© <span id="year"></span> Terinashi</footer>
+  </main>
+
+  <script>
+    // Update footer year automatically
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
