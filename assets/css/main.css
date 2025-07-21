@@ -1,0 +1,32 @@
+/* === “Barbie‑sutil” Palette === */
+:root {
+  --pink1:#f4eaff;
+  --pink2:#ffd6f0;
+  --pink3:#ffb6e9;
+  --text:#3f003f;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;font-family:'Quicksand',sans-serif;color:var(--text);
+  background:linear-gradient(135deg,var(--pink1)0%,var(--pink2)60%,var(--pink3)100%);
+  display:flex;align-items:center;justify-content:center;text-align:center;}
+
+.container{width:100%;max-width:480px;padding:1.5rem}
+header{display:flex;flex-direction:column;align-items:center;margin-bottom:1.5rem}
+.avatar{width:160px;height:160px;border-radius:50%;object-fit:cover;box-shadow:0 6px 16px #0002;margin-bottom:1rem}
+h1{font-size:2.5rem;font-weight:700;letter-spacing:.04em}
+.tagline{margin-top:.25rem;font-size:1.05rem;font-weight:500;opacity:.85}
+
+.links{list-style:none;margin-top:2rem;display:flex;flex-direction:column;gap:0.9rem}
+.link-btn{display:block;width:100%;padding:0.9rem 1rem;border-radius:9999px;font-size:1.05rem;font-weight:600;
+  color:white;text-decoration:none;transition:transform .15s ease}
+.link-btn:hover{transform:translateY(-3px)}
+
+.instagram{background:#E1306C}
+.tiktok{background:#010101}
+.youtube{background:#FF0000}
+.spotify{background:#1DB954}
+.patreon{background:#F96854}
+.x{background:#000}
+
+footer{margin-top:2.5rem;font-size:.85rem;opacity:.6}
