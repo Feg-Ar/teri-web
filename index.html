@@ -18,22 +18,35 @@
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <main class="container">
-    <header>
-      <img src="assets/img/cover.jpg" alt="Terinashi logo or artwork" class="avatar" />
-      <h1>Terinashi</h1>
-      <p class="tagline">Singer • Songwriter</p>
-    </header>
 
-    <ul class="links">
-      <!-- Replace href values with your real handles -->
-      <li><a class="link-btn instagram" href="https://instagram.com/terinashi" target="_blank" rel="noopener">Instagram</a></li>
-      <li><a class="link-btn tiktok" href="https://tiktok.com/@terinashi" target="_blank" rel="noopener">TikTok</a></li>
-      <li><a class="link-btn youtube" href="https://youtube.com/@terinashi" target="_blank" rel="noopener">YouTube</a></li>
-      <li><a class="link-btn spotify" href="https://open.spotify.com/artist/4ImJrUl2GnVD2dgYm2elaB" target="_blank" rel="noopener">Spotify</a></li>
-      <li><a class="link-btn patreon" href="https://patreon.com/terinashi" target="_blank" rel="noopener">Patreon</a></li>
-      <!-- <li><a class="link-btn x" href="https://x.com/terinashiMusic" target="_blank" rel="noopener">X (Twitter)</a></li> -->
-    </ul>
+  <main class="container">
+    <section class="links-block">
+      <!-- fondo animado SOLO para esta sección -->
+      <div class="video-wrapper">
+        <video autoplay muted loop playsinline
+              poster="assets/img/cover.png">
+          <source src="assets/vids/background-starred-night_hb.mp4" type="video/mp4">
+          <source src="assets/vids/background-starred-night_hb.webm" type="video/webm">
+        </video>
+      </div>
+      <header>
+        <img src="assets/img/cover.png" alt="Terinashi logo or artwork" class="avatar" />
+        <h1>Terinashi</h1>
+        <p class="tagline">Singer • Songwriter</p>
+      </header>
+
+      <!-- tu lista de redes -->
+
+      <ul class="links">
+        <!-- Replace href values with your real handles -->
+        <li><a class="link-btn instagram" href="https://instagram.com/terinashi" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a class="link-btn tiktok" href="https://tiktok.com/@terinashi" target="_blank" rel="noopener">TikTok</a></li>
+        <li><a class="link-btn youtube" href="https://youtube.com/@terinashi" target="_blank" rel="noopener">YouTube</a></li>
+        <li><a class="link-btn spotify" href="https://open.spotify.com/artist/4ImJrUl2GnVD2dgYm2elaB" target="_blank" rel="noopener">Spotify</a></li>
+        <li><a class="link-btn patreon" href="https://patreon.com/terinashi" target="_blank" rel="noopener">Patreon</a></li>
+        <!-- <li><a class="link-btn x" href="https://x.com/terinashiMusic" target="_blank" rel="noopener">X (Twitter)</a></li> -->
+      </ul>
+    </section>
 
     <footer>© <span id="year"></span> Terinashi</footer>
   </main>
