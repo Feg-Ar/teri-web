@@ -21,6 +21,9 @@
 <body>
   <canvas id="bg-canvas" aria-hidden="true"></canvas>
   <div class="noise" aria-hidden="true"></div>
+  <a class="floating-logo" href="#landing" aria-label="Terinashi home">
+    <img src="assets/img/cover.png" alt="Terinashi logo" />
+  </a>
 
   <main id="sections" class="sections">
     <header class="hero snap-section" id="landing">
@@ -188,6 +191,7 @@
     const sectionsRoot = document.getElementById('sections');
     const sectionNav = document.getElementById('section-nav');
     const floatingTop = document.querySelector('.floating-top');
+    const floatingLogo = document.querySelector('.floating-logo');
 
     function applySectionOrder() {
       if (!sectionsRoot || sectionConfig.length === 0) return;
@@ -236,9 +240,32 @@
       }
     }
 
+    function setupFloatingLogoVisibility() {
+      if (!floatingLogo) return;
+      const landingSection = document.getElementById('landing');
+      if (!landingSection) return;
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.target.id !== 'landing') return;
+            if (entry.isIntersecting) {
+              floatingLogo.classList.add('is-hidden');
+            } else {
+              floatingLogo.classList.remove('is-hidden');
+            }
+          });
+        },
+        { threshold: 0.55 }
+      );
+
+      observer.observe(landingSection);
+    }
+
     applySectionOrder();
     buildSectionNav();
     setFloatingTopTarget();
+    setupFloatingLogoVisibility();
 
     // Add more videos here for the grid under "Clips and songs".
     // Each entry needs a title and a YouTube URL.

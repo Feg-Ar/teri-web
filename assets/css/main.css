@@ -68,6 +68,42 @@ img {
   mix-blend-mode: soft-light;
 }
 
+.floating-logo {
+  position: fixed;
+  top: 1.6rem;
+  left: 1.6rem;
+  z-index: 9;
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  border: 1px solid var(--stroke);
+  background: rgba(10, 7, 17, 0.85);
+  box-shadow: var(--shadow);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.floating-logo img {
+  width: 100%;
+  height: 100%;
+  border-radius: 14px;
+  object-fit: cover;
+}
+
+.floating-logo:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-2);
+}
+
+.floating-logo.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-6px);
+}
+
 .container {
   width: min(var(--max-width), 92vw);
   margin: 0 auto;
@@ -567,6 +603,14 @@ footer {
 }
 
 @media (max-width: 720px) {
+  .floating-logo {
+    top: 1rem;
+    left: 1rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+  }
+
   .avatar {
     width: 120px;
     height: 120px;
