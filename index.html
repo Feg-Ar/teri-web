@@ -44,7 +44,9 @@
           <h2 class="panel-title" id="latest-title">Terinashi - Latest video</h2>
           <p class="panel-meta">Press play for a quick preview.</p>
           <div class="panel-actions">
-            <button class="btn outline" type="button" id="latest-audio-btn" aria-pressed="false">Play preview</button>
+            <button class="btn outline preview-toggle" type="button" id="latest-audio-btn" aria-pressed="false" data-state="play" aria-label="Play preview">
+              <span class="sr-only">Play preview</span>
+            </button>
           </div>
           <div class="audio-player" id="latest-audio-player" aria-hidden="true"></div>
         </div>
@@ -90,42 +92,42 @@
               <h3>Instagram</h3>
               <span>@terinashi</span>
             </div>
-            <span class="link-action">Open</span>
+            <span class="link-action" aria-hidden="true"></span>
           </a>
           <a class="link-card tiktok" href="https://tiktok.com/@terinashi" target="_blank" rel="noopener">
             <div>
               <h3>TikTok</h3>
               <span>@terinashi</span>
             </div>
-            <span class="link-action">Open</span>
+            <span class="link-action" aria-hidden="true"></span>
           </a>
           <a class="link-card youtube" href="https://youtube.com/@terinashi" target="_blank" rel="noopener">
             <div>
               <h3>YouTube</h3>
               <span>@terinashi</span>
             </div>
-            <span class="link-action">Open</span>
+            <span class="link-action" aria-hidden="true"></span>
           </a>
           <a class="link-card spotify" href="https://open.spotify.com/artist/4ImJrUl2GnVD2dgYm2elaB" target="_blank" rel="noopener">
             <div>
               <h3>Spotify</h3>
               <span>Official profile</span>
             </div>
-            <span class="link-action">Open</span>
+            <span class="link-action" aria-hidden="true"></span>
           </a>
           <a class="link-card patreon" href="https://patreon.com/terinashi" target="_blank" rel="noopener">
             <div>
               <h3>Patreon</h3>
               <span>Extra content</span>
             </div>
-            <span class="link-action">Open</span>
+            <span class="link-action" aria-hidden="true"></span>
           </a>
           <a class="link-card x" href="https://x.com/terinashiMusic" target="_blank" rel="noopener">
             <div>
               <h3>X</h3>
               <span>@terinashiMusic</span>
             </div>
-            <span class="link-action">Open</span>
+            <span class="link-action" aria-hidden="true"></span>
           </a>
         </div>
       </div>
@@ -142,14 +144,15 @@
             <p>More videos coming soon.</p>
           </div>
         </div>
-        <footer class="section-footer">
-          <div class="footer-inner">
-            <p>(c) <span id="year"></span> Terinashi. All rights reserved.</p>
-          </div>
-        </footer>
       </div>
     </section>
   </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>(c) <span id="year"></span> Terinashi. All rights reserved.</p>
+    </div>
+  </footer>
 
   <a class="floating-top" href="#landing" aria-label="Back to top">Back to top</a>
 
@@ -353,8 +356,13 @@
       if (!audioPlayer || !audioButton) return;
       audioPlayer.textContent = '';
       previewPlaying = false;
-      audioButton.textContent = 'Play preview';
+      audioButton.setAttribute('data-state', 'play');
       audioButton.setAttribute('aria-pressed', 'false');
+      audioButton.setAttribute('aria-label', 'Play preview');
+      const label = audioButton.querySelector('.sr-only');
+      if (label) {
+        label.textContent = 'Play preview';
+      }
     }
 
     function startAudioPreview() {
@@ -382,8 +390,13 @@
       audioPlayer.appendChild(iframe);
 
       previewPlaying = true;
-      audioButton.textContent = 'Stop preview';
+      audioButton.setAttribute('data-state', 'stop');
       audioButton.setAttribute('aria-pressed', 'true');
+      audioButton.setAttribute('aria-label', 'Stop preview');
+      const label = audioButton.querySelector('.sr-only');
+      if (label) {
+        label.textContent = 'Stop preview';
+      }
     }
 
     if (audioButton) {
