@@ -50,6 +50,13 @@
             <button class="btn outline preview-toggle" type="button" id="latest-audio-btn" aria-pressed="false" data-state="play" aria-label="Play preview">
               <span class="sr-only">Play preview</span>
             </button>
+            <div class="audio-visualizer" id="audio-visualizer" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
           </div>
           <div class="audio-player" id="latest-audio-player" aria-hidden="true"></div>
         </div>
@@ -155,6 +162,7 @@
     <div class="container footer-inner">
       <p>(c) <span id="year"></span> Terinashi. All rights reserved.</p>
       <p>Contact me at hello@terinashi.com</p>
+      <p>Website support: feg.solutions.ar@gmail.com</p>
     </div>
   </footer>
 
@@ -167,6 +175,10 @@
     }
 
     const siteConfig = {
+      tagline: {
+        desktop: 'Independent singer-songwriter influenced by hip hop, experimental pop, electronic atmospheres, and nu metal. Dive into my world: music videos, lyric videos, behind-the-scenes content, and more.', // Landing tagline for desktop.
+        mobile: 'Independent singer-songwriter blending hip hop, experimental pop, electronic atmospheres, and nu metal.' // Shorter landing tagline for mobile.
+      },
       latestRelease: {
         title: 'Terinashi - No Gravity', // Latest release title.
         videoUrl: 'https://www.youtube.com/watch?v=MVVgty45aqQ', // Full YouTube URL for the main video.
@@ -192,6 +204,7 @@
     const sectionsRoot = document.getElementById('sections');
     const sectionNav = document.getElementById('section-nav');
     const floatingTop = document.querySelector('.floating-top');
+    const taglineEl = document.querySelector('.tagline');
     const floatingLogo = document.querySelector('.floating-logo');
 
     function applySectionOrder() {
@@ -241,6 +254,17 @@
       }
     }
 
+    function updateTagline() {
+      if (!taglineEl || !siteConfig.tagline) return;
+      const mobileQuery = window.matchMedia('(max-width: 720px)');
+      const nextText = mobileQuery.matches && siteConfig.tagline.mobile
+        ? siteConfig.tagline.mobile
+        : siteConfig.tagline.desktop;
+      if (nextText) {
+        taglineEl.textContent = nextText;
+      }
+    }
+
     function setupFloatingLogoVisibility() {
       if (!floatingLogo) return;
       const landingSection = document.getElementById('landing');
@@ -267,6 +291,14 @@
     buildSectionNav();
     setFloatingTopTarget();
     setupFloatingLogoVisibility();
+    updateTagline();
+
+    const mobileQuery = window.matchMedia('(max-width: 720px)');
+    if (mobileQuery.addEventListener) {
+      mobileQuery.addEventListener('change', updateTagline);
+    } else if (mobileQuery.addListener) {
+      mobileQuery.addListener(updateTagline);
+    }
 
     // Add more videos here for the grid under "Clips and songs".
     // Each entry needs a title and a YouTube URL.
@@ -378,6 +410,7 @@
 
     const audioButton = document.getElementById('latest-audio-btn');
     const audioPlayer = document.getElementById('latest-audio-player');
+    const audioVisualizer = document.getElementById('audio-visualizer');
     let previewPlaying = false;
 
     function stopAudioPreview() {
@@ -387,6 +420,9 @@
       audioButton.setAttribute('data-state', 'play');
       audioButton.setAttribute('aria-pressed', 'false');
       audioButton.setAttribute('aria-label', 'Play preview');
+      if (audioVisualizer) {
+        audioVisualizer.classList.remove('is-playing');
+      }
       const label = audioButton.querySelector('.sr-only');
       if (label) {
         label.textContent = 'Play preview';
@@ -421,6 +457,9 @@
       audioButton.setAttribute('data-state', 'stop');
       audioButton.setAttribute('aria-pressed', 'true');
       audioButton.setAttribute('aria-label', 'Stop preview');
+      if (audioVisualizer) {
+        audioVisualizer.classList.add('is-playing');
+      }
       const label = audioButton.querySelector('.sr-only');
       if (label) {
         label.textContent = 'Stop preview';
