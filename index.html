@@ -175,6 +175,10 @@
     }
 
     const siteConfig = {
+      tagline: {
+        desktop: 'Independent singer-songwriter influenced by hip hop, experimental pop, electronic atmospheres, and nu metal. Dive into my world: music videos, lyric videos, behind-the-scenes content, and more.', // Landing tagline for desktop.
+        mobile: 'Independent singer-songwriter blending hip hop, experimental pop, electronic atmospheres, and nu metal.' // Shorter landing tagline for mobile.
+      },
       latestRelease: {
         title: 'Terinashi - No Gravity', // Latest release title.
         videoUrl: 'https://www.youtube.com/watch?v=MVVgty45aqQ', // Full YouTube URL for the main video.
@@ -200,6 +204,7 @@
     const sectionsRoot = document.getElementById('sections');
     const sectionNav = document.getElementById('section-nav');
     const floatingTop = document.querySelector('.floating-top');
+    const taglineEl = document.querySelector('.tagline');
     const floatingLogo = document.querySelector('.floating-logo');
 
     function applySectionOrder() {
@@ -249,6 +254,17 @@
       }
     }
 
+    function updateTagline() {
+      if (!taglineEl || !siteConfig.tagline) return;
+      const mobileQuery = window.matchMedia('(max-width: 720px)');
+      const nextText = mobileQuery.matches && siteConfig.tagline.mobile
+        ? siteConfig.tagline.mobile
+        : siteConfig.tagline.desktop;
+      if (nextText) {
+        taglineEl.textContent = nextText;
+      }
+    }
+
     function setupFloatingLogoVisibility() {
       if (!floatingLogo) return;
       const landingSection = document.getElementById('landing');
@@ -275,6 +291,14 @@
     buildSectionNav();
     setFloatingTopTarget();
     setupFloatingLogoVisibility();
+    updateTagline();
+
+    const mobileQuery = window.matchMedia('(max-width: 720px)');
+    if (mobileQuery.addEventListener) {
+      mobileQuery.addEventListener('change', updateTagline);
+    } else if (mobileQuery.addListener) {
+      mobileQuery.addListener(updateTagline);
+    }
 
     // Add more videos here for the grid under "Clips and songs".
     // Each entry needs a title and a YouTube URL.
