@@ -19,11 +19,15 @@
   padding: 0;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 html {
   scroll-behavior: smooth;
   height: 100%;
   scroll-snap-type: y mandatory;
-  scroll-padding-top: 2rem;
+  scroll-padding-top: 0;
 }
 
 body {
