@@ -50,6 +50,13 @@
             <button class="btn outline preview-toggle" type="button" id="latest-audio-btn" aria-pressed="false" data-state="play" aria-label="Play preview">
               <span class="sr-only">Play preview</span>
             </button>
+            <div class="audio-visualizer" id="audio-visualizer" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
           </div>
           <div class="audio-player" id="latest-audio-player" aria-hidden="true"></div>
         </div>
@@ -379,6 +386,7 @@
 
     const audioButton = document.getElementById('latest-audio-btn');
     const audioPlayer = document.getElementById('latest-audio-player');
+    const audioVisualizer = document.getElementById('audio-visualizer');
     let previewPlaying = false;
 
     function stopAudioPreview() {
@@ -388,6 +396,9 @@
       audioButton.setAttribute('data-state', 'play');
       audioButton.setAttribute('aria-pressed', 'false');
       audioButton.setAttribute('aria-label', 'Play preview');
+      if (audioVisualizer) {
+        audioVisualizer.classList.remove('is-playing');
+      }
       const label = audioButton.querySelector('.sr-only');
       if (label) {
         label.textContent = 'Play preview';
@@ -422,6 +433,9 @@
       audioButton.setAttribute('data-state', 'stop');
       audioButton.setAttribute('aria-pressed', 'true');
       audioButton.setAttribute('aria-label', 'Stop preview');
+      if (audioVisualizer) {
+        audioVisualizer.classList.add('is-playing');
+      }
       const label = audioButton.querySelector('.sr-only');
       if (label) {
         label.textContent = 'Stop preview';

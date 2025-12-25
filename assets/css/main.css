@@ -308,6 +308,57 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   gap: 0.6rem;
+  align-items: center;
+}
+
+.audio-visualizer {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.25rem;
+  height: 1.3rem;
+  opacity: 0.45;
+}
+
+.audio-visualizer span {
+  width: 0.2rem;
+  height: 0.5rem;
+  background: var(--play);
+  border-radius: 999px;
+  transform-origin: bottom;
+}
+
+.audio-visualizer.is-playing {
+  opacity: 0.9;
+}
+
+.audio-visualizer.is-playing span {
+  animation: audio-bars 0.9s ease-in-out infinite;
+}
+
+.audio-visualizer.is-playing span:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.audio-visualizer.is-playing span:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.audio-visualizer.is-playing span:nth-child(4) {
+  animation-delay: 0.3s;
+}
+
+.audio-visualizer.is-playing span:nth-child(5) {
+  animation-delay: 0.4s;
+}
+
+@keyframes audio-bars {
+  0%,
+  100% {
+    transform: scaleY(0.5);
+  }
+  50% {
+    transform: scaleY(1.5);
+  }
 }
 
 .preview-toggle {
