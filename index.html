@@ -4,55 +4,539 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Terinashi | Official Links</title>
-  <meta name="description" content="Find Terinashi on every platform. One place, all the vibes." />
-  <meta property="og:title" content="Terinashi | Official Links" />
-  <meta property="og:description" content="All the places you can follow Terinashi." />
+  <title>Terinashi | Official Portal</title>
+  <meta name="description" content="Official portal of Terinashi. Links, releases, and clips in one place." />
+  <meta property="og:title" content="Terinashi | Official Portal" />
+  <meta property="og:description" content="Links, releases, and clips from Terinashi." />
   <meta property="og:url" content="https://terinashi.com" />
   <meta property="og:image" content="https://terinashi.com/cover.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#0b0714" />
   <link rel="icon" href="/favicon.ico" />
-  <!-- External stylesheet -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Unbounded:wght@400;600;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/main.css" />
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet" />
 </head>
 <body>
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  <div class="noise" aria-hidden="true"></div>
+  <a class="floating-logo" href="#landing" aria-label="Terinashi home">
+    <img src="assets/img/cover.png" alt="Terinashi logo" />
+  </a>
 
-  <main class="container">
-    <section class="links-block">
-      <!-- fondo animado SOLO para esta sección -->
-      <div class="video-wrapper">
-        <video autoplay muted loop playsinline
-              poster="assets/img/cover.png">
-          <source src="assets/vids/background-starred-night.mp4" type="video/mp4">
-          <source src="assets/vids/background-starred-night_hb.webm" type="video/webm">
-        </video>
+  <main id="sections" class="sections">
+    <header class="hero snap-section" id="landing">
+      <div class="container hero-grid">
+        <div class="hero-left">
+          <div class="brand">
+            <img src="assets/img/cover.png" alt="Terinashi artwork" class="avatar" />
+            <div class="brand-copy">
+              <p class="eyebrow">Official portal</p>
+              <h1>Terinashi</h1>
+              <p class="tagline">Independent singer-songwriter influenced by hip hop, experimental pop, electronic atmospheres, and nu metal. Dive into my world: music videos, lyric videos, behind-the-scenes content, and more.</p>
+              <div class="cta">
+                <a class="btn primary" href="#latest">Watch latest video</a>
+              </div>
+              <nav class="section-nav" id="section-nav" aria-label="Sections"></nav>
+            </div>
+          </div>
+        </div>
+        <div class="hero-panel glass">
+          <p class="panel-label">Latest release</p>
+          <h2 class="panel-title" id="latest-title">Terinashi - Latest video</h2>
+          <p class="panel-meta">Press play for a quick preview.</p>
+          <div class="panel-actions">
+            <button class="btn outline preview-toggle" type="button" id="latest-audio-btn" aria-pressed="false" data-state="play" aria-label="Play preview">
+              <span class="sr-only">Play preview</span>
+            </button>
+          </div>
+          <div class="audio-player" id="latest-audio-player" aria-hidden="true"></div>
+        </div>
       </div>
-      <header>
-        <img src="assets/img/cover.png" alt="Terinashi logo or artwork" class="avatar" />
-        <h1>Terinashi</h1>
-        <p class="tagline">Singer • Songwriter</p>
-      </header>
+    </header>
 
-      <!-- tu lista de redes -->
-
-      <ul class="links">
-        <!-- Replace href values with your real handles -->
-        <li><a class="link-btn instagram" href="https://instagram.com/terinashi" target="_blank" rel="noopener">Instagram</a></li>
-        <li><a class="link-btn tiktok" href="https://tiktok.com/@terinashi" target="_blank" rel="noopener">TikTok</a></li>
-        <li><a class="link-btn youtube" href="https://youtube.com/@terinashi" target="_blank" rel="noopener">YouTube</a></li>
-        <li><a class="link-btn spotify" href="https://open.spotify.com/artist/4ImJrUl2GnVD2dgYm2elaB" target="_blank" rel="noopener">Spotify</a></li>
-        <li><a class="link-btn patreon" href="https://patreon.com/terinashi" target="_blank" rel="noopener">Patreon</a></li>
-        <!-- <li><a class="link-btn x" href="https://x.com/terinashiMusic" target="_blank" rel="noopener">X (Twitter)</a></li> -->
-      </ul>
+    <section id="intro" class="section snap-section">
+      <div class="container intro-grid">
+        <div class="intro-copy">
+          <h2 class="section-title">Artist intro</h2>
+          <p class="section-subtitle">A short personal intro from Terinashi to new listeners.</p>
+        </div>
+        <div class="video-frame glass">
+          <iframe loading="lazy" id="intro-iframe" width="560" height="315" src="https://www.youtube.com/embed/MVVgty45aqQ" title="Artist intro video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>
     </section>
 
-    <footer>© <span id="year"></span> Terinashi</footer>
+    <section id="latest" class="section snap-section">
+      <div class="container latest-grid">
+        <div class="latest-copy">
+          <h2 class="section-title">Latest music video</h2>
+          <p class="section-subtitle">Official premiere for fans and press. Stream the new visual now.</p>
+          <div class="cta">
+            <a class="btn primary" id="latest-video-link" href="https://www.youtube.com/watch?v=MVVgty45aqQ" target="_blank" rel="noopener">Watch on YouTube</a>
+          </div>
+        </div>
+        <div class="video-frame glass">
+          <iframe loading="lazy" id="latest-iframe" width="560" height="315" src="https://www.youtube.com/embed/MVVgty45aqQ?si=aVt3DLzRXBg-9M-Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section id="links" class="section snap-section">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">Official links</h2>
+          <p class="section-subtitle">Everything in one place to follow and listen.</p>
+        </div>
+        <div class="links-grid">
+          <a class="link-card instagram" href="https://instagram.com/terinashi" target="_blank" rel="noopener">
+            <div>
+              <h3>Instagram</h3>
+              <span>@terinashi</span>
+            </div>
+            <span class="link-action" aria-hidden="true"></span>
+          </a>
+          <a class="link-card tiktok" href="https://tiktok.com/@terinashi" target="_blank" rel="noopener">
+            <div>
+              <h3>TikTok</h3>
+              <span>@terinashi</span>
+            </div>
+            <span class="link-action" aria-hidden="true"></span>
+          </a>
+          <a class="link-card youtube" href="https://youtube.com/@terinashi" target="_blank" rel="noopener">
+            <div>
+              <h3>YouTube</h3>
+              <span>@terinashi</span>
+            </div>
+            <span class="link-action" aria-hidden="true"></span>
+          </a>
+          <a class="link-card spotify" href="https://open.spotify.com/artist/4ImJrUl2GnVD2dgYm2elaB" target="_blank" rel="noopener">
+            <div>
+              <h3>Spotify</h3>
+              <span>Official profile</span>
+            </div>
+            <span class="link-action" aria-hidden="true"></span>
+          </a>
+          <a class="link-card patreon" href="https://patreon.com/terinashi" target="_blank" rel="noopener">
+            <div>
+              <h3>Patreon</h3>
+              <span>Extra content</span>
+            </div>
+            <span class="link-action" aria-hidden="true"></span>
+          </a>
+          <a class="link-card x" href="https://x.com/terinashiMusic" target="_blank" rel="noopener">
+            <div>
+              <h3>X</h3>
+              <span>@terinashiMusic</span>
+            </div>
+            <span class="link-action" aria-hidden="true"></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="clips" class="section snap-section">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">Clips and songs</h2>
+          <p class="section-subtitle">A growing archive of videos, visuals, and live sessions.</p>
+        </div>
+        <div id="video-list" class="video-grid">
+          <div class="video-empty glass">
+            <p>More videos coming soon.</p>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>(c) <span id="year"></span> Terinashi. All rights reserved.</p>
+      <p>Contact me at hello@terinashi.com</p>
+    </div>
+  </footer>
+
+  <a class="floating-top" href="#landing" aria-label="Back to top">Back to top</a>
+
   <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
+    const yearEl = document.getElementById('year');
+    if (yearEl) {
+      yearEl.textContent = new Date().getFullYear();
+    }
+
+    const siteConfig = {
+      latestRelease: {
+        title: 'Terinashi - No Gravity', // Latest release title.
+        videoUrl: 'https://www.youtube.com/watch?v=MVVgty45aqQ', // Full YouTube URL for the main video.
+        previewUrl: 'https://youtu.be/MVVgty45aqQ?t=51' // YouTube URL with start time for the audio preview.
+      },
+      introVideo: {
+        title: 'Terinashi - Artist intro', // Title used for the intro video iframe.
+        videoUrl: 'https://www.youtube.com/watch?v=MVVgty45aqQ' // Intro video URL.
+      },
+      // Sections order and visibility.
+      sections: [
+        { id: 'landing', label: 'Home', enabled: true, showInNav: false },
+        { id: 'links', label: 'Official links', enabled: true, showInNav: true },
+        { id: 'latest', label: 'Latest video', enabled: true, showInNav: false },
+        { id: 'intro', label: 'Intro', enabled: false, showInNav: true },
+        { id: 'clips', label: 'Clips & songs', enabled: true, showInNav: true }
+      ]
+    };
+
+    const latestRelease = siteConfig.latestRelease || {};
+    const introVideo = siteConfig.introVideo || {};
+    const sectionConfig = Array.isArray(siteConfig.sections) ? siteConfig.sections : [];
+    const sectionsRoot = document.getElementById('sections');
+    const sectionNav = document.getElementById('section-nav');
+    const floatingTop = document.querySelector('.floating-top');
+    const floatingLogo = document.querySelector('.floating-logo');
+
+    function applySectionOrder() {
+      if (!sectionsRoot || sectionConfig.length === 0) return;
+      const sectionMap = new Map();
+
+      sectionConfig.forEach((section) => {
+        const sectionEl = document.getElementById(section.id);
+        if (!sectionEl) return;
+        if (section.enabled === false) {
+          sectionEl.hidden = true;
+          return;
+        }
+        sectionEl.hidden = false;
+        sectionMap.set(section.id, sectionEl);
+      });
+
+      sectionConfig.forEach((section) => {
+        const sectionEl = sectionMap.get(section.id);
+        if (sectionEl) {
+          sectionsRoot.appendChild(sectionEl);
+        }
+      });
+    }
+
+    function buildSectionNav() {
+      if (!sectionNav || sectionConfig.length === 0) return;
+      sectionNav.textContent = '';
+      const fragment = document.createDocumentFragment();
+
+      sectionConfig.forEach((section) => {
+        if (section.enabled === false || !section.showInNav) return;
+        const link = document.createElement('a');
+        link.href = '#' + section.id;
+        link.textContent = section.label || section.id;
+        fragment.appendChild(link);
+      });
+
+      sectionNav.appendChild(fragment);
+    }
+
+    function setFloatingTopTarget() {
+      if (!floatingTop || sectionConfig.length === 0) return;
+      const firstSection = sectionConfig.find((section) => section.enabled !== false);
+      if (firstSection) {
+        floatingTop.href = '#' + firstSection.id;
+      }
+    }
+
+    function setupFloatingLogoVisibility() {
+      if (!floatingLogo) return;
+      const landingSection = document.getElementById('landing');
+      if (!landingSection) return;
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.target.id !== 'landing') return;
+            if (entry.isIntersecting) {
+              floatingLogo.classList.add('is-hidden');
+            } else {
+              floatingLogo.classList.remove('is-hidden');
+            }
+          });
+        },
+        { threshold: 0.55 }
+      );
+
+      observer.observe(landingSection);
+    }
+
+    applySectionOrder();
+    buildSectionNav();
+    setFloatingTopTarget();
+    setupFloatingLogoVisibility();
+
+    // Add more videos here for the grid under "Clips and songs".
+    // Each entry needs a title and a YouTube URL.
+    const videoList = [
+      {
+        title: latestRelease.title,
+        url: latestRelease.videoUrl
+      },
+      {
+        title: 'Terinashi - Layers Audio',
+        url: 'https://www.youtube.com/embed/SHfj68ilbn0?si=UP3I9V4nUgJSvSKc'
+      }
+    ].filter((video) => video.title && video.url);
+
+    const videoListEl = document.getElementById('video-list');
+    const emptyState = document.querySelector('.video-empty');
+
+    function getYouTubeId(url) {
+      try {
+        const parsed = new URL(url);
+        if (parsed.hostname.includes('youtu.be')) {
+          return parsed.pathname.slice(1);
+        }
+        if (parsed.hostname.includes('youtube.com')) {
+          const id = parsed.searchParams.get('v');
+          if (id) return id;
+          if (parsed.pathname.startsWith('/embed/')) {
+            return parsed.pathname.split('/').pop();
+          }
+        }
+      } catch (error) {
+        return null;
+      }
+      return null;
+    }
+
+    function parseTimeToSeconds(value) {
+      if (!value) return 0;
+      if (/^\d+$/.test(value)) return Number(value);
+
+      const match = value.match(/(?:(\d+)h)?(?:(\d+)m)?(?:(\d+)s)?/);
+      if (!match) return 0;
+
+      const hours = match[1] ? Number(match[1]) : 0;
+      const minutes = match[2] ? Number(match[2]) : 0;
+      const seconds = match[3] ? Number(match[3]) : 0;
+      return hours * 3600 + minutes * 60 + seconds;
+    }
+
+    function getYouTubeStartSeconds(url) {
+      try {
+        const parsed = new URL(url);
+        const startValue = parsed.searchParams.get('t') || parsed.searchParams.get('start');
+        return parseTimeToSeconds(startValue);
+      } catch (error) {
+        return 0;
+      }
+    }
+
+    function buildEmbedUrl(url, options = {}) {
+      const id = getYouTubeId(url);
+      if (!id) return null;
+
+      const params = new URLSearchParams();
+      if (options.startSeconds && options.startSeconds > 0) {
+        params.set('start', String(options.startSeconds));
+      }
+      if (options.autoplay) {
+        params.set('autoplay', '1');
+      }
+      if (options.controls === false) {
+        params.set('controls', '0');
+      }
+      params.set('playsinline', '1');
+      params.set('modestbranding', '1');
+      params.set('rel', '0');
+
+      const query = params.toString();
+      return 'https://www.youtube.com/embed/' + id + (query ? '?' + query : '');
+    }
+
+    const latestTitleEl = document.getElementById('latest-title');
+    if (latestTitleEl && latestRelease.title) {
+      latestTitleEl.textContent = latestRelease.title;
+    }
+
+    const latestVideoLink = document.getElementById('latest-video-link');
+    if (latestVideoLink && latestRelease.videoUrl) {
+      latestVideoLink.href = latestRelease.videoUrl;
+    }
+
+    const latestIframe = document.getElementById('latest-iframe');
+    if (latestIframe && latestRelease.videoUrl) {
+      const embedUrl = buildEmbedUrl(latestRelease.videoUrl);
+      if (embedUrl) {
+        latestIframe.src = embedUrl;
+        latestIframe.title = latestRelease.title || 'Latest release';
+      }
+    }
+
+    const introIframe = document.getElementById('intro-iframe');
+    if (introIframe && introVideo.videoUrl) {
+      const embedUrl = buildEmbedUrl(introVideo.videoUrl);
+      if (embedUrl) {
+        introIframe.src = embedUrl;
+        introIframe.title = introVideo.title || 'Artist intro';
+      }
+    }
+
+    const audioButton = document.getElementById('latest-audio-btn');
+    const audioPlayer = document.getElementById('latest-audio-player');
+    let previewPlaying = false;
+
+    function stopAudioPreview() {
+      if (!audioPlayer || !audioButton) return;
+      audioPlayer.textContent = '';
+      previewPlaying = false;
+      audioButton.setAttribute('data-state', 'play');
+      audioButton.setAttribute('aria-pressed', 'false');
+      audioButton.setAttribute('aria-label', 'Play preview');
+      const label = audioButton.querySelector('.sr-only');
+      if (label) {
+        label.textContent = 'Play preview';
+      }
+    }
+
+    function startAudioPreview() {
+      if (!audioPlayer || !audioButton) return;
+      const previewUrl = latestRelease.previewUrl || latestRelease.videoUrl;
+      if (!previewUrl) return;
+
+      const startSeconds = getYouTubeStartSeconds(previewUrl);
+      const embedUrl = buildEmbedUrl(previewUrl, {
+        startSeconds,
+        autoplay: true,
+        controls: false
+      });
+
+      if (!embedUrl) return;
+
+      const iframe = document.createElement('iframe');
+      iframe.src = embedUrl;
+      iframe.title = latestRelease.title ? latestRelease.title + ' preview' : 'Audio preview';
+      iframe.allow = 'autoplay; encrypted-media';
+      iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+      iframe.setAttribute('allowfullscreen', '');
+
+      audioPlayer.textContent = '';
+      audioPlayer.appendChild(iframe);
+
+      previewPlaying = true;
+      audioButton.setAttribute('data-state', 'stop');
+      audioButton.setAttribute('aria-pressed', 'true');
+      audioButton.setAttribute('aria-label', 'Stop preview');
+      const label = audioButton.querySelector('.sr-only');
+      if (label) {
+        label.textContent = 'Stop preview';
+      }
+    }
+
+    if (audioButton) {
+      audioButton.addEventListener('click', () => {
+        if (previewPlaying) {
+          stopAudioPreview();
+        } else {
+          startAudioPreview();
+        }
+      });
+    }
+
+    function createVideoCard(video) {
+      const embedUrl = buildEmbedUrl(video.url);
+      if (!embedUrl || !videoListEl) return null;
+
+      const card = document.createElement('article');
+      card.className = 'video-card glass';
+
+      const frame = document.createElement('div');
+      frame.className = 'video-frame';
+      frame.innerHTML = '<iframe loading="lazy" src="' + embedUrl + '" title="' + video.title + '" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>';
+
+      const title = document.createElement('h3');
+      title.textContent = video.title;
+
+      const link = document.createElement('a');
+      link.href = video.url;
+      link.target = '_blank';
+      link.rel = 'noopener';
+      link.className = 'video-link';
+      link.textContent = 'Watch on YouTube';
+
+      card.append(frame, title, link);
+      return card;
+    }
+
+    if (videoListEl) {
+      let added = 0;
+      videoList.forEach((video) => {
+        const card = createVideoCard(video);
+        if (card) {
+          videoListEl.appendChild(card);
+          added += 1;
+        }
+      });
+
+      if (added > 0 && emptyState) {
+        emptyState.remove();
+      }
+    }
+
+    const canvas = document.getElementById('bg-canvas');
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      let width = 0;
+      let height = 0;
+      let particles = [];
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const saveData = navigator.connection && navigator.connection.saveData;
+
+      const resize = () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+        const count = Math.min(140, Math.floor((width * height) / 9000));
+        particles = Array.from({ length: count }, () => ({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          radius: Math.random() * 1.2 + 0.4,
+          speed: Math.random() * 0.6 + 0.15,
+          drift: (Math.random() - 0.5) * 0.2,
+          alpha: Math.random() * 0.6 + 0.15
+        }));
+      };
+
+      const draw = () => {
+        ctx.clearRect(0, 0, width, height);
+        for (const p of particles) {
+          ctx.globalAlpha = p.alpha;
+          ctx.fillStyle = '#ffffff';
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.fill();
+          p.y -= p.speed;
+          p.x += p.drift;
+          if (p.y < -20) {
+            p.y = height + 20;
+            p.x = Math.random() * width;
+          }
+          if (p.x < -20) {
+            p.x = width + 20;
+          } else if (p.x > width + 20) {
+            p.x = -20;
+          }
+        }
+        ctx.globalAlpha = 1;
+      };
+
+      const loop = () => {
+        draw();
+        requestAnimationFrame(loop);
+      };
+
+      resize();
+      window.addEventListener('resize', resize);
+
+      if (!reduceMotion && !saveData) {
+        loop();
+      } else {
+        draw();
+      }
+    }
   </script>
 </body>
 </html>
