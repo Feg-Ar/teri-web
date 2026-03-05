@@ -552,17 +552,55 @@
       });
     }
 
+    function parseIsoDate(value) {
+      if (!value) return null;
+      const match = String(value).trim().match(/^(\d{4})-(\d{2})-(\d{2})$/);
+      if (!match) return null;
+      const year = Number(match[1]);
+      const monthIndex = Number(match[2]) - 1;
+      const day = Number(match[3]);
+      const date = new Date(year, monthIndex, day);
+      if (Number.isNaN(date.getTime())) return null;
+      return date;
+    }
+
+    function startOfDay(date) {
+      return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    }
+
+    function isFutureDate(date) {
+      return startOfDay(date) > startOfDay(new Date());
+    }
+
+    function formatDisplayDate(date) {
+      return new Intl.DateTimeFormat('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric'
+      }).format(date);
+    }
+
     function updateReleaseTag() {
+      const releaseDateValue = activeRelease && activeRelease.releaseDate ? String(activeRelease.releaseDate).trim() : '';
+      const parsedReleaseDate = parseIsoDate(releaseDateValue);
+      const hasReleaseDate = Boolean(releaseDateValue);
+      const futureRelease = parsedReleaseDate ? isFutureDate(parsedReleaseDate) : false;
+
       if (panelLabel) {
-        panelLabel.textContent = activeRelease.latest ? 'Latest release' : 'Release date';
+        if (!hasReleaseDate) {
+          panelLabel.textContent = activeRelease.latest ? 'Latest release' : 'Release date';
+        } else {
+          panelLabel.textContent = futureRelease ? 'Releases' : 'Released';
+        }
       }
+
       if (!releaseTag) return;
-      if (activeRelease.latest || !activeRelease.releaseDate) {
+      if (!hasReleaseDate) {
         releaseTag.textContent = '';
         releaseTag.hidden = true;
         return;
       }
-      releaseTag.textContent = activeRelease.releaseDate;
+      releaseTag.textContent = parsedReleaseDate ? formatDisplayDate(parsedReleaseDate) : releaseDateValue;
       releaseTag.hidden = false;
     }
 
