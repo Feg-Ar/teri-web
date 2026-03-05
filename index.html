@@ -43,7 +43,16 @@
           </div>
         </div>
         <div class="hero-panel glass">
-          <p class="panel-label">Latest release</p>
+          <div class="panel-top">
+            <div class="panel-release-meta">
+              <p class="panel-label">Latest release</p>
+              <p class="release-tag" id="release-tag" hidden></p>
+            </div>
+            <div class="release-switcher">
+              <label for="release-select"></label>
+              <select id="release-select" name="release-select"></select>
+            </div>
+          </div>
           <h2 class="panel-title" id="latest-title">Terinashi - Latest video</h2>
           <p class="panel-meta">Press play for a quick preview.</p>
           <div class="panel-actions">
@@ -179,11 +188,44 @@
         desktop: 'Independent singer-songwriter influenced by hip hop, experimental pop, electronic atmospheres, and nu metal. Dive into my world: music videos, lyric videos, behind-the-scenes content, and more.', // Landing tagline for desktop.
         mobile: 'Independent singer-songwriter blending hip hop, experimental pop, electronic atmospheres, and nu metal.' // Shorter landing tagline for mobile.
       },
-      latestRelease: {
-        title: 'Terinashi - No Gravity', // Latest release title.
-        videoUrl: 'https://www.youtube.com/watch?v=MVVgty45aqQ', // Full YouTube URL for the main video.
-        previewUrl: 'https://youtu.be/MVVgty45aqQ?t=51' // YouTube URL with start time for the audio preview.
-      },
+      releases: [
+        {
+          id: 'no-gravity',
+          name: 'No Gravity',
+          title: 'Terinashi - No Gravity', // Latest release title.
+          releaseDate: '2025-10-01',
+          videoUrl: 'https://www.youtube.com/watch?v=MVVgty45aqQ', // Full YouTube URL for the main video.
+          previewUrl: 'https://youtu.be/MVVgty45aqQ?t=51', // YouTube URL with start time for the audio preview.
+          palette: {
+            bg1: '#0b0714',
+            bg2: '#140b1f',
+            bg3: '#04070d',
+            accent: '#ff3b6b',
+            accent2: '#57f0d6',
+            play: '#3dff8b',
+            accentShadow: 'rgba(255, 59, 107, 0.35)'
+          },
+          latest: false
+        },
+        {
+          id: 'layers',
+          name: 'Layers',
+          title: 'Terinashi - Layers',
+          releaseDate: '2026-02-25',
+          videoUrl: 'https://www.youtube.com/watch?v=SHfj68ilbn0',
+          previewUrl: 'https://youtu.be/SHfj68ilbn0?si=a4gpbc3fm8DPk9wZ&t=116',
+          palette: {
+            bg1: '#041014',
+            bg2: '#061f24',
+            bg3: '#042613',
+            accent: '#8cf3ff',
+            accent2: '#33d28d',
+            play: '#4fd4bc',
+            accentShadow: 'rgba(140, 243, 255, 0.32)'
+          },
+          latest: true
+        }
+      ],
       introVideo: {
         title: 'Terinashi - Artist intro', // Title used for the intro video iframe.
         videoUrl: 'https://www.youtube.com/watch?v=MVVgty45aqQ' // Intro video URL.
@@ -191,14 +233,14 @@
       // Sections order and visibility.
       sections: [
         { id: 'landing', label: 'Home', enabled: true, showInNav: false },
-        { id: 'links', label: 'Official links', enabled: true, showInNav: true },
         { id: 'latest', label: 'Latest video', enabled: true, showInNav: false },
+        { id: 'links', label: 'Official links', enabled: true, showInNav: true },
         { id: 'intro', label: 'Intro', enabled: false, showInNav: true },
         { id: 'clips', label: 'Clips & songs', enabled: true, showInNav: true }
       ]
     };
 
-    const latestRelease = siteConfig.latestRelease || {};
+    const releasesConfig = Array.isArray(siteConfig.releases) ? siteConfig.releases : [];
     const introVideo = siteConfig.introVideo || {};
     const sectionConfig = Array.isArray(siteConfig.sections) ? siteConfig.sections : [];
     const sectionsRoot = document.getElementById('sections');
@@ -206,6 +248,33 @@
     const floatingTop = document.querySelector('.floating-top');
     const taglineEl = document.querySelector('.tagline');
     const floatingLogo = document.querySelector('.floating-logo');
+    const releaseSelect = document.getElementById('release-select');
+    const releaseTag = document.getElementById('release-tag');
+    const panelLabel = document.querySelector('.panel-label');
+
+    const defaultPalette = {
+      bg1: getComputedStyle(document.documentElement).getPropertyValue('--bg-1').trim(),
+      bg2: getComputedStyle(document.documentElement).getPropertyValue('--bg-2').trim(),
+      bg3: getComputedStyle(document.documentElement).getPropertyValue('--bg-3').trim(),
+      accent: getComputedStyle(document.documentElement).getPropertyValue('--accent').trim(),
+      accent2: getComputedStyle(document.documentElement).getPropertyValue('--accent-2').trim(),
+      play: getComputedStyle(document.documentElement).getPropertyValue('--play').trim(),
+      accentShadow: getComputedStyle(document.documentElement).getPropertyValue('--accent-shadow').trim()
+    };
+
+    const paletteKeys = Object.keys(defaultPalette);
+
+    function getReleaseById(id) {
+      return releasesConfig.find((release) => release.id === id);
+    }
+
+    function getLatestRelease() {
+      const marked = releasesConfig.find((release) => release.latest);
+      if (marked) return marked;
+      return releasesConfig[0] || {};
+    }
+
+    let activeRelease = getLatestRelease();
 
     function applySectionOrder() {
       if (!sectionsRoot || sectionConfig.length === 0) return;
@@ -300,21 +369,7 @@
       mobileQuery.addListener(updateTagline);
     }
 
-    // Add more videos here for the grid under "Clips and songs".
-    // Each entry needs a title and a YouTube URL.
-    const videoList = [
-      {
-        title: latestRelease.title,
-        url: latestRelease.videoUrl
-      },
-      {
-        title: 'Terinashi - Layers Audio',
-        url: 'https://www.youtube.com/embed/SHfj68ilbn0?si=UP3I9V4nUgJSvSKc'
-      }
-    ].filter((video) => video.title && video.url);
-
     const videoListEl = document.getElementById('video-list');
-    const emptyState = document.querySelector('.video-empty');
 
     function getYouTubeId(url) {
       try {
@@ -381,23 +436,8 @@
     }
 
     const latestTitleEl = document.getElementById('latest-title');
-    if (latestTitleEl && latestRelease.title) {
-      latestTitleEl.textContent = latestRelease.title;
-    }
-
     const latestVideoLink = document.getElementById('latest-video-link');
-    if (latestVideoLink && latestRelease.videoUrl) {
-      latestVideoLink.href = latestRelease.videoUrl;
-    }
-
     const latestIframe = document.getElementById('latest-iframe');
-    if (latestIframe && latestRelease.videoUrl) {
-      const embedUrl = buildEmbedUrl(latestRelease.videoUrl);
-      if (embedUrl) {
-        latestIframe.src = embedUrl;
-        latestIframe.title = latestRelease.title || 'Latest release';
-      }
-    }
 
     const introIframe = document.getElementById('intro-iframe');
     if (introIframe && introVideo.videoUrl) {
@@ -431,7 +471,7 @@
 
     function startAudioPreview() {
       if (!audioPlayer || !audioButton) return;
-      const previewUrl = latestRelease.previewUrl || latestRelease.videoUrl;
+      const previewUrl = activeRelease.previewUrl || activeRelease.videoUrl;
       if (!previewUrl) return;
 
       const startSeconds = getYouTubeStartSeconds(previewUrl);
@@ -445,7 +485,7 @@
 
       const iframe = document.createElement('iframe');
       iframe.src = embedUrl;
-      iframe.title = latestRelease.title ? latestRelease.title + ' preview' : 'Audio preview';
+      iframe.title = activeRelease.title ? activeRelease.title + ' preview' : 'Audio preview';
       iframe.allow = 'autoplay; encrypted-media';
       iframe.referrerPolicy = 'strict-origin-when-cross-origin';
       iframe.setAttribute('allowfullscreen', '');
@@ -476,6 +516,56 @@
       });
     }
 
+    function toCssVarName(key) {
+      return '--' + key
+        .replace(/([A-Z])/g, '-$1')
+        .replace(/([0-9])/g, '-$1')
+        .toLowerCase();
+    }
+
+    function applyPalette(palette = {}) {
+      paletteKeys.forEach((key) => {
+        const nextValue = palette[key] || defaultPalette[key];
+        document.documentElement.style.setProperty(toCssVarName(key), nextValue);
+      });
+    }
+
+    function renderReleaseSelector() {
+      if (!releaseSelect) return;
+      releaseSelect.textContent = '';
+
+      releasesConfig.forEach((release) => {
+        const option = document.createElement('option');
+        option.value = release.id;
+        option.textContent = release.name || release.title || release.id;
+        if (release.id === activeRelease.id) {
+          option.selected = true;
+        }
+        releaseSelect.appendChild(option);
+      });
+
+      releaseSelect.addEventListener('change', () => {
+        const selected = getReleaseById(releaseSelect.value);
+        if (selected) {
+          setActiveRelease(selected);
+        }
+      });
+    }
+
+    function updateReleaseTag() {
+      if (panelLabel) {
+        panelLabel.textContent = activeRelease.latest ? 'Latest release' : 'Release date';
+      }
+      if (!releaseTag) return;
+      if (activeRelease.latest || !activeRelease.releaseDate) {
+        releaseTag.textContent = '';
+        releaseTag.hidden = true;
+        return;
+      }
+      releaseTag.textContent = activeRelease.releaseDate;
+      releaseTag.hidden = false;
+    }
+
     function createVideoCard(video) {
       const embedUrl = buildEmbedUrl(video.url);
       if (!embedUrl || !videoListEl) return null;
@@ -501,20 +591,68 @@
       return card;
     }
 
-    if (videoListEl) {
-      let added = 0;
-      videoList.forEach((video) => {
+    function renderVideoGrid(entries) {
+      if (!videoListEl) return;
+      videoListEl.textContent = '';
+
+      const finalList = entries.filter((video) => video.title && video.url);
+
+      if (finalList.length === 0) {
+        const empty = document.createElement('div');
+        empty.className = 'video-empty glass';
+        empty.innerHTML = '<p>More videos coming soon.</p>';
+        videoListEl.appendChild(empty);
+        return;
+      }
+
+      finalList.forEach((video) => {
         const card = createVideoCard(video);
         if (card) {
           videoListEl.appendChild(card);
-          added += 1;
         }
       });
-
-      if (added > 0 && emptyState) {
-        emptyState.remove();
-      }
     }
+
+    function buildVideoList() {
+      const entries = releasesConfig
+        .filter((release) => release && release.title && release.videoUrl)
+        .map((release) => ({
+          title: release.title,
+          url: release.videoUrl
+        }));
+
+      renderVideoGrid(entries);
+    }
+
+    function setActiveRelease(release) {
+      if (!release) return;
+      activeRelease = release;
+      stopAudioPreview();
+
+      if (latestTitleEl && activeRelease.title) {
+        latestTitleEl.textContent = activeRelease.title;
+      }
+
+      if (latestVideoLink && activeRelease.videoUrl) {
+        latestVideoLink.href = activeRelease.videoUrl;
+      }
+
+      if (latestIframe && activeRelease.videoUrl) {
+        const embedUrl = buildEmbedUrl(activeRelease.videoUrl);
+        if (embedUrl) {
+          latestIframe.src = embedUrl;
+          latestIframe.title = activeRelease.title || 'Latest release';
+        }
+      }
+
+      updateReleaseTag();
+      applyPalette(activeRelease.palette);
+    }
+
+    applyPalette(activeRelease.palette);
+    renderReleaseSelector();
+    buildVideoList();
+    setActiveRelease(activeRelease);
 
     const canvas = document.getElementById('bg-canvas');
     if (canvas) {
