@@ -1,0 +1,21 @@
+name = "terinashi-go-redirect"
+main = "src/index.js"
+compatibility_date = "2026-03-05"
+workers_dev = false
+
+[[routes]]
+pattern = "terinashi.com/go/*"
+zone_name = "terinashi.com"
+
+[[routes]]
+pattern = "www.terinashi.com/go/*"
+zone_name = "terinashi.com"
+
+[[analytics_engine_datasets]]
+binding = "PATREON_CLICKS"
+dataset = "patreon_clicks"
+
+[vars]
+PATREON_URL = "https://patreon.com/terinashi"
+FORWARD_UTM = "0"
+
