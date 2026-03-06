@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Redirecting…</title>
+    <meta http-equiv="refresh" content="1; url=https://patreon.com/terinashi" />
+  </head>
+  <body>
+    <p>Redirecting to Patreon…</p>
+    <p><a id="dest-link" href="https://patreon.com/terinashi">Click here if you are not redirected.</a></p>
+    <script>
+      (function () {
+        const DEST_BASE = "https://patreon.com/terinashi";
+        const DEFAULTS = {
+          utm_source: "instagram",
+          utm_medium: "social",
+        };
+
+        const current = new URL(window.location.href);
+        const dest = new URL(DEST_BASE);
+
+        const utmKeys = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"];
+        for (const key of utmKeys) {
+          const value = current.searchParams.get(key);
+          if (value) {
+            dest.searchParams.set(key, value);
+          } else if (DEFAULTS[key]) {
+            dest.searchParams.set(key, DEFAULTS[key]);
+          }
+        }
+
+        const link = document.getElementById("dest-link");
+        if (link) link.href = dest.toString();
+        window.location.replace(dest.toString());
+      })();
+    </script>
+  </body>
+</html>
+
