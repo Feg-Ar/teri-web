@@ -6,6 +6,21 @@ const DEFAULTS_BY_TAG = {
   site: { utm_source: "website", utm_medium: "site" },
 };
 
+const ALIAS_UTM_OVERRIDES = {
+  thanks: {
+    utm_campaign: "layers_launch_2026q1",
+    utm_medium: "description",
+    utm_content: "layers_long",
+    utm_term: "XTJdqofsgYc",
+  },
+  love: {
+    utm_campaign: "layers_launch_2026q1",
+    utm_medium: "comment_pinned",
+    utm_content: "layers_long",
+    utm_term: "XTJdqofsgYc",
+  },
+};
+
 function normalizeTag(value) {
   return (value || "").trim().toLowerCase();
 }
@@ -22,12 +37,42 @@ function getRouteInfo(pathname) {
   return { ok: true, tag, detail };
 }
 
-function getUtm(url, tag) {
+function getAliasFromDetail(detail) {
+  if (!detail) return "";
+
+  const candidate = normalizeTag(detail.split("/")[0]);
+  return ALIAS_UTM_OVERRIDES[candidate] ? candidate : "";
+}
+
+function getAliasFromQuery(url) {
+  const explicit = url.searchParams.get("alias") || url.searchParams.get("a") || url.searchParams.get("ref");
+  if (explicit) {
+    const candidate = normalizeTag(explicit);
+    if (ALIAS_UTM_OVERRIDES[candidate]) return candidate;
+  }
+
+  for (const key of url.searchParams.keys()) {
+    const candidate = normalizeTag(key);
+    if (ALIAS_UTM_OVERRIDES[candidate]) return candidate;
+  }
+
+  return "";
+}
+
+function getUtm(url, tag, alias) {
   const defaults = DEFAULTS_BY_TAG[tag] || { utm_source: "direct", utm_medium: "redirect" };
+  const overrides = (alias && ALIAS_UTM_OVERRIDES[alias]) || {};
   const result = {};
 
   for (const key of UTM_KEYS) {
-    result[key] = url.searchParams.get(key) || defaults[key] || "";
+    const value = (url.searchParams.get(key) || "").trim();
+    if (value) {
+      result[key] = value;
+    } else if (overrides[key]) {
+      result[key] = overrides[key];
+    } else {
+      result[key] = defaults[key] || "";
+    }
   }
 
   return result;
@@ -88,7 +133,9 @@ export default {
       return new Response("Not Found", { status: 404 });
     }
 
-    const utm = getUtm(url, route.tag);
+    const alias = getAliasFromDetail(route.detail) || getAliasFromQuery(url);
+    const routeDetailForAnalytics = route.detail || alias || "";
+    const utm = getUtm(url, route.tag, alias);
     const refererHost = getRefererHost(request);
     const country = getCountry(request);
     const uaClass = classifyUserAgent(request.headers.get("User-Agent") || "");
@@ -101,7 +148,7 @@ export default {
           blobs: [
             url.pathname,
             route.tag,
-            route.detail,
+            routeDetailForAnalytics,
             utm.utm_source,
             utm.utm_medium,
             utm.utm_campaign,
