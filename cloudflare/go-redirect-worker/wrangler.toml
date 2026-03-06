@@ -4,11 +4,11 @@ compatibility_date = "2026-03-05"
 workers_dev = false
 
 [[routes]]
-pattern = "terinashi.com/go/*"
+pattern = "terinashi.com/go/patreon*"
 zone_name = "terinashi.com"
 
 [[routes]]
-pattern = "www.terinashi.com/go/*"
+pattern = "www.terinashi.com/go/patreon*"
 zone_name = "terinashi.com"
 
 [[analytics_engine_datasets]]
@@ -17,5 +17,4 @@ dataset = "patreon_clicks"
 
 [vars]
 PATREON_URL = "https://patreon.com/terinashi"
-FORWARD_UTM = "0"
-
+FORWARD_UTM = "1"

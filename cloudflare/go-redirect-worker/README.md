@@ -21,7 +21,7 @@ The Analytics Engine dataset (`patreon_clicks`) is created automatically on firs
 
 ## Quick smoke test
 
-Open `https://terinashi.com/go/patreon/yt?utm_campaign=test` and confirm:
+Open `https://terinashi.com/go/patreon/yt?utm_campaign=test&utm_content=smoke` and confirm:
 
 - it redirects to Patreon
 - events appear in Analytics Engine under dataset `patreon_clicks`
@@ -29,5 +29,5 @@ Open `https://terinashi.com/go/patreon/yt?utm_campaign=test` and confirm:
 ## Notes
 
 - Destination URL is controlled by `PATREON_URL` in `wrangler.toml`.
-- If you want the redirect to also *append* UTMs to the Patreon URL, set `FORWARD_UTM = "1"`.
-
+- By default, the redirect appends UTMs to the Patreon URL (`FORWARD_UTM = "1"`). Set it to `"0"` if you want a clean destination URL.
+- Only `GET` requests are counted as clicks (we still redirect `HEAD`, but we do not log it).

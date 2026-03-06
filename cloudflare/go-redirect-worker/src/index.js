@@ -93,26 +93,28 @@ export default {
     const country = getCountry(request);
     const uaClass = classifyUserAgent(request.headers.get("User-Agent") || "");
 
-    try {
-      env.PATREON_CLICKS.writeDataPoint({
-        indexes: [route.tag],
-        doubles: [1],
-        blobs: [
-          url.pathname,
-          route.tag,
-          route.detail,
-          utm.utm_source,
-          utm.utm_medium,
-          utm.utm_campaign,
-          utm.utm_content,
-          utm.utm_term,
-          refererHost,
-          country,
-          uaClass,
-        ],
-      });
-    } catch {
-      // Intentionally ignore analytics failures; redirect should still work.
+    if (request.method === "GET") {
+      try {
+        env.PATREON_CLICKS.writeDataPoint({
+          indexes: [route.tag],
+          doubles: [1],
+          blobs: [
+            url.pathname,
+            route.tag,
+            route.detail,
+            utm.utm_source,
+            utm.utm_medium,
+            utm.utm_campaign,
+            utm.utm_content,
+            utm.utm_term,
+            refererHost,
+            country,
+            uaClass,
+          ],
+        });
+      } catch {
+        // Intentionally ignore analytics failures; redirect should still work.
+      }
     }
 
     const patreonUrl = env.PATREON_URL || "https://patreon.com/terinashi";
@@ -128,4 +130,3 @@ export default {
     });
   },
 };
-
