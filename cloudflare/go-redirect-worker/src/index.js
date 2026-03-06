@@ -19,6 +19,18 @@ const ALIAS_UTM_OVERRIDES = {
     utm_content: "layers_long",
     utm_term: "XTJdqofsgYc",
   },
+  hope: {
+    utm_campaign: "layers_launch_2026q1",
+    utm_medium: "comment_pinned",
+    utm_content: "nogravity_long",
+    utm_term: "MVVgty45aqQ",
+  },
+  smile: {
+    utm_campaign: "layers_launch_2026q1",
+    utm_medium: "description",
+    utm_content: "nogravity_long",
+    utm_term: "MVVgty45aqQ",
+  },
 };
 
 function normalizeTag(value) {

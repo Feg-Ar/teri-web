@@ -15,6 +15,8 @@ To avoid long URLs in social posts, you can use a short alias and have the Worke
 
 - `https://terinashi.com/go/patreon/yt/thanks` (or `...?thanks`) → `layers_launch_2026q1` + `description`
 - `https://terinashi.com/go/patreon/yt/love` (or `...?love`) → `layers_launch_2026q1` + `comment_pinned`
+- `https://terinashi.com/go/patreon/yt/hope` (or `...?hope`) → `layers_launch_2026q1` + `comment_pinned` (`nogravity_long`)
+- `https://terinashi.com/go/patreon/yt/smile` (or `...?smile`) → `layers_launch_2026q1` + `description` (`nogravity_long`)
 
 Edit `ALIAS_UTM_OVERRIDES` in `src/index.js` to add more.
 
