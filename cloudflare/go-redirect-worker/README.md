@@ -9,6 +9,15 @@ This Worker tracks clicks (UTMs + a few extra fields) and redirects to Patreon.
 - `https://terinashi.com/go/patreon/site` (defaults: `utm_source=website`, `utm_medium=site`)
 - You can override/extend with standard UTM query params: `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`
 
+## Short aliases (optional)
+
+To avoid long URLs in social posts, you can use a short alias and have the Worker expand it into UTMs:
+
+- `https://terinashi.com/go/patreon/yt/thanks` (or `...?thanks`) → `layers_launch_2026q1` + `description`
+- `https://terinashi.com/go/patreon/yt/love` (or `...?love`) → `layers_launch_2026q1` + `comment_pinned`
+
+Edit `ALIAS_UTM_OVERRIDES` in `src/index.js` to add more.
+
 ## Deploy (Wrangler)
 
 1. Install Wrangler (once): `npm i -g wrangler`
