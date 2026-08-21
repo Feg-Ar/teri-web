@@ -4,14 +4,20 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Terinashi | Official Site</title>
-  <meta name="description" content="Official Site of Terinashi. Links, releases, and clips in one place." />
-  <meta property="og:title" content="Terinashi | Official Site" />
-  <meta property="og:description" content="Links, releases, and clips from Terinashi." />
+  <title>Terinashi - Off Limits | Official Music Video</title>
+  <meta name="description" content="Watch Terinashi - Off Limits (Official Music Video), released August 18, 2026." />
+  <meta property="og:title" content="Terinashi - Off Limits (Official Music Video)" />
+  <meta property="og:description" content="Watch the official music video for Off Limits by Terinashi." />
   <meta property="og:url" content="https://terinashi.com" />
-  <meta property="og:image" content="https://terinashi.com/cover.jpg" />
+  <meta property="og:type" content="video.other" />
+  <meta property="og:image" content="https://i.ytimg.com/vi/JoTjI9XeCSU/maxresdefault.jpg" />
+  <meta property="og:image:alt" content="Terinashi - Off Limits (Official Music Video)" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="theme-color" content="#0b0714" />
+  <meta name="twitter:title" content="Terinashi - Off Limits (Official Music Video)" />
+  <meta name="twitter:description" content="Watch the official music video for Off Limits by Terinashi." />
+  <meta name="twitter:image" content="https://i.ytimg.com/vi/JoTjI9XeCSU/maxresdefault.jpg" />
+  <meta name="twitter:image:alt" content="Terinashi - Off Limits (Official Music Video)" />
+  <meta name="theme-color" content="#020611" />
   <link rel="icon" href="/favicon.ico" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -53,7 +59,7 @@
               <select id="release-select" name="release-select"></select>
             </div>
           </div>
-          <h2 class="panel-title" id="latest-title">Terinashi - Latest video</h2>
+          <h2 class="panel-title" id="latest-title">Terinashi - Off Limits (Official Music Video)</h2>
           <p class="panel-meta">Press play for a quick preview.</p>
           <div class="panel-actions">
             <button class="btn outline preview-toggle" type="button" id="latest-audio-btn" aria-pressed="false" data-state="play" aria-label="Play preview">
@@ -88,13 +94,13 @@
       <div class="container latest-grid">
         <div class="latest-copy">
           <h2 class="section-title">Latest music video</h2>
-          <p class="section-subtitle">Official premiere for fans and press. Stream the new visual now.</p>
+          <p class="section-subtitle">Watch Off Limits, the new official music video from Terinashi.</p>
           <div class="cta">
-            <a class="btn primary" id="latest-video-link" href="https://www.youtube.com/watch?v=MVVgty45aqQ" target="_blank" rel="noopener">Watch on YouTube</a>
+            <a class="btn primary" id="latest-video-link" href="https://www.youtube.com/watch?v=JoTjI9XeCSU" target="_blank" rel="noopener">Watch on YouTube</a>
           </div>
         </div>
         <div class="video-frame glass">
-          <iframe loading="lazy" id="latest-iframe" width="560" height="315" src="https://www.youtube.com/embed/MVVgty45aqQ?si=aVt3DLzRXBg-9M-Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <iframe loading="lazy" id="latest-iframe" width="560" height="315" src="https://www.youtube.com/embed/JoTjI9XeCSU" title="Terinashi - Off Limits (Official Music Video)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
       </div>
     </section>
@@ -201,9 +207,12 @@
             bg2: '#140b1f',
             bg3: '#04070d',
             accent: '#ff3b6b',
+            accentText: '#0b0714',
             accent2: '#57f0d6',
             play: '#3dff8b',
-            accentShadow: 'rgba(255, 59, 107, 0.35)'
+            accentShadow: 'rgba(255, 59, 107, 0.35)',
+            accent2Shadow: 'rgba(87, 240, 214, 0.18)',
+            glass: 'rgba(10, 7, 17, 0.58)'
           },
           latest: false
         },
@@ -219,9 +228,33 @@
             bg2: '#061f24',
             bg3: '#042613',
             accent: '#8cf3ff',
+            accentText: '#041014',
             accent2: '#33d28d',
             play: '#4fd4bc',
-            accentShadow: 'rgba(140, 243, 255, 0.32)'
+            accentShadow: 'rgba(140, 243, 255, 0.32)',
+            accent2Shadow: 'rgba(51, 210, 141, 0.18)',
+            glass: 'rgba(4, 16, 20, 0.62)'
+          },
+          latest: false
+        },
+        {
+          id: 'off-limits',
+          name: 'Off Limits',
+          title: 'Terinashi - Off Limits (Official Music Video)',
+          releaseDate: '2026-08-18',
+          videoUrl: 'https://www.youtube.com/watch?v=JoTjI9XeCSU',
+          previewUrl: 'https://youtu.be/JoTjI9XeCSU',
+          palette: {
+            bg1: '#020611',
+            bg2: '#061a3d',
+            bg3: '#01040b',
+            accent: '#0358fa',
+            accentText: '#f2f8ff',
+            accent2: '#b9d1dc',
+            play: '#dff7ff',
+            accentShadow: 'rgba(3, 88, 250, 0.34)',
+            accent2Shadow: 'rgba(185, 209, 220, 0.2)',
+            glass: 'rgba(2, 8, 22, 0.68)'
           },
           latest: true
         }
@@ -257,9 +290,12 @@
       bg2: getComputedStyle(document.documentElement).getPropertyValue('--bg-2').trim(),
       bg3: getComputedStyle(document.documentElement).getPropertyValue('--bg-3').trim(),
       accent: getComputedStyle(document.documentElement).getPropertyValue('--accent').trim(),
+      accentText: getComputedStyle(document.documentElement).getPropertyValue('--accent-text').trim(),
       accent2: getComputedStyle(document.documentElement).getPropertyValue('--accent-2').trim(),
       play: getComputedStyle(document.documentElement).getPropertyValue('--play').trim(),
-      accentShadow: getComputedStyle(document.documentElement).getPropertyValue('--accent-shadow').trim()
+      accentShadow: getComputedStyle(document.documentElement).getPropertyValue('--accent-shadow').trim(),
+      accent2Shadow: getComputedStyle(document.documentElement).getPropertyValue('--accent-2-shadow').trim(),
+      glass: getComputedStyle(document.documentElement).getPropertyValue('--glass').trim()
     };
 
     const paletteKeys = Object.keys(defaultPalette);
