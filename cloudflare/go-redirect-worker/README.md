@@ -4,10 +4,21 @@ This Worker tracks clicks (UTMs + a few extra fields) and redirects to Patreon.
 
 ## What it handles
 
-- `https://terinashi.com/go/patreon/yt` (defaults: `utm_source=youtube`, `utm_medium=social`)
-- `https://terinashi.com/go/patreon/ig` (defaults: `utm_source=instagram`, `utm_medium=social`)
-- `https://terinashi.com/go/patreon/site` (defaults: `utm_source=website`, `utm_medium=site`)
+- `https://terinashi.com/go/patreon/yt` (defaults: `utm_source=youtube`, `utm_medium=description`)
+- `https://terinashi.com/go/patreon/ig` (defaults: `utm_source=instagram`, `utm_medium=bio`)
+- `https://terinashi.com/go/patreon/site` (defaults: `utm_source=website`, `utm_medium=landing`)
 - You can override/extend with standard UTM query params: `utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`
+
+## UTM convention
+
+- `utm_source`: the origin surface (`youtube`, `instagram`, `website`)
+- `utm_medium`: the placement inside that surface (`description`, `comment_pinned`, `bio`, `official_links`)
+- `utm_content`: the specific CTA or creative variant (`layers_long`, `nogravity_long`, `patreon_card`)
+- `utm_term`: the asset id or variant key when useful
+
+Website CTA example:
+
+- `https://terinashi.com/go/patreon/site?utm_medium=official_links&utm_content=patreon_card`
 
 ## Short aliases (optional)
 

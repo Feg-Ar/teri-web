@@ -1,9 +1,13 @@
 const UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"];
 
+// Recommended taxonomy:
+// - utm_source: origin surface/platform
+// - utm_medium: placement inside that surface
+// - utm_content: concrete CTA or creative variant
 const DEFAULTS_BY_TAG = {
-  yt: { utm_source: "youtube", utm_medium: "social" },
-  ig: { utm_source: "instagram", utm_medium: "social" },
-  site: { utm_source: "website", utm_medium: "site" },
+  yt: { utm_source: "youtube", utm_medium: "description" },
+  ig: { utm_source: "instagram", utm_medium: "bio" },
+  site: { utm_source: "website", utm_medium: "landing" },
 };
 
 const ALIAS_UTM_OVERRIDES = {
